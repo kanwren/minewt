@@ -65,7 +65,7 @@ Using the converter:
 
 ```typescript
 // Wrap underlying type in newtype
-const dollars: Dollars = Dollars.wrap(3);
+const dollars: Dollars = Dollars(3);
 // Unwrap newtype into underlying type
 const amount: number = Dollars.unwrap(dollars);
 

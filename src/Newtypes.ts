@@ -18,7 +18,7 @@ const newtypeSymbol = Symbol();
  *   const Int = newtype<Int>();
  *
  *   // Wrap a 'number' into an 'Int'
- *   const anInt: Int = Int.wrap(3);
+ *   const anInt: Int = Int(3);
  *
  *   // Unwrap an 'Int' into a 'number'
  *   const aNumber: number = Int.unwrap(anInt);
@@ -42,9 +42,8 @@ export type NewtypeRepr<N extends Newtype<any, any>> = N extends Newtype<infer T
  * between the newtype and its underlying type; that is, it encapsulates the
  * behavior to convert between the two types.
  */
-export interface NewtypeWrapper<N extends Newtype<any, any>> {
+export type NewtypeWrapper<N extends Newtype<any, any>> = ((x: NewtypeRepr<N>) => N) & {
     readonly unwrap: (wrapped: N) => NewtypeRepr<N>;
-    readonly wrap: (bare: NewtypeRepr<N>) => N;
 }
 
 /**
@@ -52,12 +51,9 @@ export interface NewtypeWrapper<N extends Newtype<any, any>> {
  * newtype and its representation type.
  */
 export function newtype<N extends Newtype<any, any> = never>(): NewtypeWrapper<N> {
-    return {
-        // Since the wrapper type only carries type information, unsafe coercion
-        // is fine here
-        unwrap: (x: N) => x as NewtypeRepr<N>,
-        wrap: (x: NewtypeRepr<N>) => x as N,
-    };
+    const f = (x: NewtypeRepr<N>): N => x as N;
+    f.unwrap = (x: N) => x as NewtypeRepr<N>;
+    return f;
 }
 
 /**
