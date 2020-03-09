@@ -15,7 +15,7 @@ const newtypeSymbol = Symbol();
  * 'number'. In order to convert between the two types, you need an isomorphism:
  *
  *   // Make the newtype converter
- *   const Int: NewtypeWrapper<Int> = newtype();
+ *   const Int = newtype<Int>();
  *
  *   // Wrap a 'number' into an 'Int'
  *   const anInt: Int = Int.wrap(3);
@@ -51,7 +51,7 @@ export interface NewtypeWrapper<N extends Newtype<any, any>> {
  * Construct a 'NewtypeWrapper' isomorphism that is able to convert between a
  * newtype and its representation type.
  */
-export function newtype<N extends Newtype<any, any>>(): NewtypeWrapper<N> {
+export function newtype<N extends Newtype<any, any> = never>(): NewtypeWrapper<N> {
     return {
         // Since the wrapper type only carries type information, unsafe coercion
         // is fine here
