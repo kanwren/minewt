@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "es6",
+    "moduleResolution": "node",
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "removeComments": true,
+    "forceConsistentCasingInFileNames": true,
+    "rootDir": "./src/",
+    "outDir": "./dist/lib",
+    "declarationDir": "./dist/types",
+    "sourceMap": true,
+    "declaration": true,
+    "newLine": "LF"
+  },
+  "include": [
+    "src"
+  ]
+}

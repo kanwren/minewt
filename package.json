@@ -1,0 +1,39 @@
+{
+  "name": "@nprindle/minewt",
+  "version": "0.0.1",
+  "description": "Minimal newtypes for TypeScript",
+  "main": "dist/minewt.umd.js",
+  "module": "dist/minewt.es5.js",
+  "types": "dist/types/minewt.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "npx shx --silent rm -r dist/ || npx shx true",
+    "compile": "npx tsc --module commonjs",
+    "compile:watch": "npx tsc --watch",
+    "rollup": "npx rollup -c rollup.config.ts",
+    "build": "npm run clean && npm run compile && npm run rollup"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "rollup": "^1.32.0",
+    "rollup-plugin-sourcemaps": "^0.5.0",
+    "rollup-plugin-typescript2": "^0.26.0",
+    "shx": "^0.3.2",
+    "source-map": "^0.7.3",
+    "typescript": "^3.8.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nprindle/minewt.git"
+  },
+  "author": "Nicole Prindle <nprindle18@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nprindle/minewt/issues"
+  },
+  "homepage": "https://github.com/nprindle/minewt#readme"
+}
