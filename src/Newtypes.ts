@@ -44,7 +44,7 @@ export type NewtypeRepr<N extends Newtype<any, any>> = N extends Newtype<infer T
  */
 export type NewtypeWrapper<N extends Newtype<any, any>> = ((x: NewtypeRepr<N>) => N) & {
     readonly unwrap: (wrapped: N) => NewtypeRepr<N>;
-}
+};
 
 /**
  * Construct a 'NewtypeWrapper' isomorphism that is able to convert between a
@@ -54,6 +54,13 @@ export function newtype<N extends Newtype<any, any> = never>(): NewtypeWrapper<N
     const f = (x: NewtypeRepr<N>): N => x as N;
     f.unwrap = (x: N) => x as NewtypeRepr<N>;
     return f;
+}
+
+/**
+ * Unwrap a newtype, inferring the appropriate underlying type
+ */
+export function unwrap<N extends Newtype<any, any>>(x: N): NewtypeRepr<N> {
+    return x as NewtypeRepr<N>;
 }
 
 /**
