@@ -12,21 +12,22 @@ const newtypeSymbol = Symbol();
  *   type Int = Newtype<number, { readonly _: unique symbol; }>;
  *
  * This declares 'Int' as a distinct type with the same representation as
- * 'number'. In order to convert between the two types, you need an isomorphism:
+ * 'number'. In order to wrap values in this newtype, you need to make a
+ * wrapper:
  *
- *   // Make the newtype converter
+ *   // Make the newtype wrapper
  *   const Int = newtype<Int>();
  *
  *   // Wrap a 'number' into an 'Int'
  *   const anInt: Int = Int(3);
  *
  *   // Unwrap an 'Int' into a 'number'
- *   const aNumber: number = Int.unwrap(anInt);
+ *   const aNumber: number = unwrap(anInt);
  *
  *   // Error! Type 'number' is not assignable to type 'Int'
  *   const error: Int = aNumber;
  *
- * Using this strategy, the type and the converter can both have the same name.
+ * Using this strategy, the type and the wrapper can both have the same name.
  */
 export interface Newtype<_T, N> {
     readonly [newtypeSymbol]: N;
@@ -38,22 +39,10 @@ export interface Newtype<_T, N> {
 export type NewtypeRepr<N extends Newtype<any, any>> = N extends Newtype<infer T, any> ? T : never;
 
 /**
- * The type of the converter returned by 'newtype'. Witnesses the isomorphism
- * between the newtype and its underlying type; that is, it encapsulates the
- * behavior to convert between the two types.
+ * Returns a function that wraps a value of a representation type in a newtype.
  */
-export type NewtypeWrapper<N extends Newtype<any, any>> = ((x: NewtypeRepr<N>) => N) & {
-    readonly unwrap: (wrapped: N) => NewtypeRepr<N>;
-};
-
-/**
- * Construct a 'NewtypeWrapper' isomorphism that is able to convert between a
- * newtype and its representation type.
- */
-export function newtype<N extends Newtype<any, any> = never>(): NewtypeWrapper<N> {
-    const f = (x: NewtypeRepr<N>): N => x as N;
-    f.unwrap = (x: N) => x as NewtypeRepr<N>;
-    return f;
+export function newtype<N extends Newtype<any, any> = never>(): (x: NewtypeRepr<N>) => N {
+    return x => x as N;
 }
 
 /**

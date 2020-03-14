@@ -1,1 +1,1 @@
-export { Newtype, NewtypeRepr, NewtypeWrapper, newtype, unwrap, liftN, liftN2 } from "./Newtypes.js";
+export { Newtype, NewtypeRepr, newtype, unwrap, liftN, liftN2 } from "./Newtypes.js";
