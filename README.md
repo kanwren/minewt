@@ -67,7 +67,7 @@ Using the converter:
 // Wrap underlying type in newtype
 const dollars: Dollars = Dollars(3);
 // Unwrap newtype into underlying type
-const amount: number = Dollars.unwrap(dollars);
+const amount: number = unwrap(dollars);
 
 // A newtype creates a distinct type:
 const x: Dollars = 3; // Error! Type '3' is not assignable to type 'Dollars'
