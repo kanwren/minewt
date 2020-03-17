@@ -36,19 +36,19 @@ export interface Newtype<_T, N> {
 /**
  * Extract the representation type 'T' from a 'Newtype<N, T>'.
  */
-export type NewtypeRepr<N extends Newtype<any, any>> = N extends Newtype<infer T, any> ? T : never;
+export type NewtypeRepr<N extends Newtype<unknown, unknown>> = N extends Newtype<infer T, unknown> ? T : never;
 
 /**
  * Returns a function that wraps a value of a representation type in a newtype.
  */
-export function newtype<N extends Newtype<any, any> = never>(): (x: NewtypeRepr<N>) => N {
+export function newtype<N extends Newtype<unknown, unknown> = never>(): (x: NewtypeRepr<N>) => N {
     return x => x as N;
 }
 
 /**
  * Unwrap a newtype, inferring the appropriate underlying type
  */
-export function unwrap<N extends Newtype<any, any>>(x: N): NewtypeRepr<N> {
+export function unwrap<N extends Newtype<unknown, unknown>>(x: N): NewtypeRepr<N> {
     return x as NewtypeRepr<N>;
 }
 
@@ -56,7 +56,7 @@ export function unwrap<N extends Newtype<any, any>>(x: N): NewtypeRepr<N> {
  * Lift a function on a representation type to a function on a newtype that
  * wraps it.
  */
-export function liftN<N extends Newtype<any, any> = never>(f: (x: NewtypeRepr<N>) => NewtypeRepr<N>): (x: N) => N {
+export function liftN<N extends Newtype<unknown, unknown> = never>(f: (x: NewtypeRepr<N>) => NewtypeRepr<N>): (x: N) => N {
     return f as unknown as (x: N) => N;
 }
 
@@ -64,7 +64,7 @@ export function liftN<N extends Newtype<any, any> = never>(f: (x: NewtypeRepr<N>
  * Lift a function of two arguments on a representation type to a function on a
  * newtype that wraps it.
  */
-export function liftN2<N extends Newtype<any, any> = never>(f: (x: NewtypeRepr<N>, y: NewtypeRepr<N>) => NewtypeRepr<N>): (x: N, y: N) => N {
+export function liftN2<N extends Newtype<unknown, unknown> = never>(f: (x: NewtypeRepr<N>, y: NewtypeRepr<N>) => NewtypeRepr<N>): (x: N, y: N) => N {
     return f as unknown as (x: N, y: N) => N;
 }
 
