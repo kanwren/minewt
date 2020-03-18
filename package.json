@@ -5,6 +5,7 @@
   "main": "dist/minewt.umd.js",
   "module": "dist/minewt.es5.js",
   "types": "dist/types/minewt.d.ts",
+  "sideEffects": false,
   "files": [
     "dist"
   ],
@@ -35,5 +36,12 @@
   "bugs": {
     "url": "https://github.com/nprindle/minewt/issues"
   },
-  "homepage": "https://github.com/nprindle/minewt#readme"
+  "homepage": "https://github.com/nprindle/minewt#readme",
+  "keywords": [
+    "typescript",
+    "newtype",
+    "newtype-ts",
+    "type-safe",
+    "functional-programming"
+  ]
 }
