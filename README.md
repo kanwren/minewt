@@ -33,7 +33,7 @@ class Dollars {
 }
 ```
 
-Now, we can convert to this new type via the constructor and field:
+Now, we can convert to and from this new type via the constructor and field:
 
 ```typescript
 const dollars: Dollars = new Dollars(3);
@@ -51,19 +51,23 @@ A **newtype** is the best of both worlds. A newtype:
 * is a distinct type from its underlying type
 * has the same runtime representation as its underlying type
 
+After compilation, a newtype will be exactly the same as its underlying type;
+all values of type `Dollars` will be `number`s at runtime. It's safe to cast
+between the two, since they have exactly the same representation.
+
 ## Usage
 
-To create the type and the converter:
+To create the type and the wrapper:
 
 ```typescript
 // Create the newtype itself
 type Dollars = Newtype<number, { readonly _: unique symbol; }>;
 
-// Create the converter to and from the newtype
+// Create the newtype wrapper function
 const Dollars = newtype<Dollars>();
 ```
 
-Using the converter:
+To wrap and unwrap values:
 
 ```typescript
 // Wrap underlying type in newtype
@@ -78,7 +82,7 @@ const x: Dollars = 3; // Error! Type '3' is not assignable to type 'Dollars'
 To query the underlying representation type, use `NewtypeRepr`:
 
 ```typescript
-NewtypeRepr<Dollars> // 'number'
+type T = NewtypeRepr<Dollars>; // 'number'
 ```
 
 You can also lift functions over the underlying type to functions over the
