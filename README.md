@@ -102,3 +102,19 @@ const addDollars = liftN2<Dollars>(add);
 const sum = addDollars(x, y);
 ```
 
+It's even possible to make newtypes that are assignable to other newtypes, using
+intersection types with `&`:
+
+```typescript
+type A = Newtype<number, { readonly _: unique symbol; }>;
+const A = newtype<A>();
+
+// B extends A
+type B = Newtype<number, { readonly _: unique symbol; }> & A;
+const B = newtype<B>();
+
+const x: A = A(0); // okay
+const y: A = B(0); // okay
+const z: B = A(0); // compile error: Type 'A' is not assignable to type 'B'
+```
+
