@@ -1,5 +1,7 @@
 # minewt
 
+![Travis CI badge](https://travis-ci.com/nprindle/minewt.svg?branch=master)
+
 A tiny newtype implementation for TypeScript.
 
 Thanks to [MayMoonsley](https://github.com/MayMoonsley) for the very punny name
