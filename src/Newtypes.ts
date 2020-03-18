@@ -9,23 +9,27 @@ const newtypeSymbol = Symbol();
  *
  * In order to make a new newtype, declare it as follows:
  *
- *   type Int = Newtype<number, { readonly _: unique symbol; }>;
+ * <pre><code>
+ * type Int = Newtype<number, { readonly _: unique symbol; }>;
+ * </code></pre>
  *
  * This declares 'Int' as a distinct type with the same representation as
  * 'number'. In order to wrap values in this newtype, you need to make a
  * wrapper:
  *
- *   // Make the newtype wrapper
- *   const Int = newtype<Int>();
+ * <pre><code>
+ * // Make the newtype wrapper
+ * const Int = newtype<Int>();
  *
- *   // Wrap a 'number' into an 'Int'
- *   const anInt: Int = Int(3);
+ * // Wrap a 'number' into an 'Int'
+ * const anInt: Int = Int(3);
  *
- *   // Unwrap an 'Int' into a 'number'
- *   const aNumber: number = unwrap(anInt);
+ * // Unwrap an 'Int' into a 'number'
+ * const aNumber: number = unwrap(anInt);
  *
- *   // Error! Type 'number' is not assignable to type 'Int'
- *   const error: Int = aNumber;
+ * // Error! Type 'number' is not assignable to type 'Int'
+ * const error: Int = aNumber;
+ * </code></pre>
  *
  * Using this strategy, the type and the wrapper can both have the same name.
  */
