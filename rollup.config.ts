@@ -8,31 +8,31 @@ const pkg = require("./package.json");
 const libraryName = pkg.name.replace(/^@.+?\//, "");
 
 export default {
-  input: `src/${libraryName}.ts`,
-  output: [
-    {
-        file: pkg.main,
-        name: libraryName,
-        format: "umd",
-        sourcemap: true
+    input: `src/${libraryName}.ts`,
+    output: [
+        {
+            file: pkg.main,
+            name: libraryName,
+            format: "umd",
+            sourcemap: true
+        },
+        {
+            file: pkg.module,
+            format: "es",
+            sourcemap: true
+        },
+    ],
+    external: [],
+    watch: {
+        include: "src/**",
     },
-    {
-        file: pkg.module,
-        format: "es",
-        sourcemap: true
-    },
-  ],
-  external: [],
-  watch: {
-    include: "src/**",
-  },
-  plugins: [
-    typescript({
-        useTsconfigDeclarationDir: true
-    }),
-    commonjs(),
-    resolve(),
-    sourceMaps(),
-  ],
+    plugins: [
+        typescript({
+            useTsconfigDeclarationDir: true
+        }),
+        commonjs(),
+        resolve(),
+        sourceMaps(),
+    ],
 }
 
