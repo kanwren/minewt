@@ -1,4 +1,4 @@
-const newtypeSymbol = Symbol();
+declare const newtypeSymbol: unique symbol;
 
 /**
  * A 'type A = Newtype<N, T>' is like a type synonym 'type A = T', but it
