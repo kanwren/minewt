@@ -53,7 +53,8 @@ A **newtype** is the best of both worlds. A newtype:
 
 After compilation, a newtype will be exactly the same as its underlying type;
 all values of type `Dollars` will be `number`s at runtime. It's safe to cast
-between the two, since they have exactly the same representation.
+between the two, since they have exactly the same representation. This makes
+newtypes a kind of _zero-cost abstraction_.
 
 ## Usage
 
@@ -117,4 +118,37 @@ const x: A = A(0); // okay
 const y: A = B(0); // okay
 const z: B = A(0); // compile error: Type 'A' is not assignable to type 'B'
 ```
+
+## Comparisons and Alternatives
+
+`minewt` is very lightweight, and doesn't provide any specific newtype
+implementations.
+
+### Other newtype implementations
+
+* [newtype-ts](https://github.com/gcantl/newtype-ts): uses a similar approach,
+  but heavier weight, as it's tightly integrated with functional optics as
+  part of the fp-ts community
+
+### Other solutions
+
+Another solution is to use **tag types**, which are a different zero-cost
+abstraction with a somewhat similar purpose to newtypes. You can use tag types
+to add information to a type, such as refinement information:
+
+```typescript
+function isEmail(str: string): str is string & Email {
+    // ...
+}
+```
+
+Multiple tags can also be added to a single type. In contrast to newtypes, tag
+types have a slightly different goal. Tag types are mostly geared towards
+validation, like the example above, and adding tags is mostly done via type
+predicates. Tags can generally be added to any type.
+
+Some neat libraries that implement tag types:
+
+* [taghiro](https://github.com/sveseme/taghiro): implements tag types, and also
+  ships with many useful tags
 
