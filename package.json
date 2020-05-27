@@ -1,6 +1,6 @@
 {
   "name": "@nprindle/minewt",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Minimal newtypes for TypeScript",
   "main": "dist/minewt.umd.js",
   "module": "dist/minewt.es5.js",
