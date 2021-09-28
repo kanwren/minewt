@@ -35,6 +35,7 @@ declare const newtypeSymbol: unique symbol;
  */
 export interface Newtype<_T, N> {
     readonly [newtypeSymbol]: N;
+    readonly _phantom: _T; // needed for generic newtypes
 }
 
 /**
