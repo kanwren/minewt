@@ -1,40 +1,37 @@
 {
-  "name": "@nprindle/minewt",
-  "version": "1.1.0",
+  "name": "@kanwren/minewt",
+  "version": "1.1.1",
   "description": "Minimal newtypes for TypeScript",
-  "main": "dist/minewt.umd.js",
-  "module": "dist/minewt.es5.js",
+  "type": "module",
+  "main": "dist/minewt.cjs",
+  "module": "dist/minewt.es.js",
   "types": "dist/types/minewt.d.ts",
   "sideEffects": false,
   "files": [
     "dist"
   ],
   "scripts": {
-    "clean": "npx shx --silent rm -r dist/ || npx shx true",
-    "compile": "npx tsc --module commonjs",
-    "compile:watch": "npx tsc --watch",
-    "rollup": "npx rollup -c rollup.config.ts",
-    "build": "npm run clean && npm run compile && npm run rollup"
+    "clean": "rm -rf dist/ *.tgz",
+    "compile": "npx tsc",
+    "rollup": "npx rollup -c rollup.config.js",
+    "build": "npm run clean && npm run compile && npm run rollup",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^20.0.0",
-    "@rollup/plugin-node-resolve": "^13.0.5",
-    "rollup": "^2.57.0",
-    "rollup-plugin-sourcemaps": "^0.6.3",
-    "rollup-plugin-typescript2": "^0.30.0",
-    "source-map": "^0.7.3",
-    "typescript": "^4.4.3"
+    "rollup": "^3.20.2",
+    "rollup-plugin-esbuild": "^5.0.0",
+    "typescript": "^5.0.4"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nprindle/minewt.git"
+    "url": "git+https://github.com/kanwren/minewt.git"
   },
-  "author": "Nicole Prindle <nprindle18@gmail.com>",
+  "author": "Nicole Wren <nicole@wren.systems>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nprindle/minewt/issues"
+    "url": "https://github.com/kanwren/minewt/issues"
   },
-  "homepage": "https://github.com/nprindle/minewt#readme",
+  "homepage": "https://github.com/kanwren/minewt#readme",
   "keywords": [
     "typescript",
     "newtype",
